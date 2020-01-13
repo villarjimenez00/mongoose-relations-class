@@ -17,7 +17,9 @@ const userSchema = new Schema({
   name: {
     type: String,
     require: [true, { message: "name is required" }]
-  }
+  },
+  // products, en este caso, será un array de ObjectIds. Es por ello que se pone el objeto objectId entre corchetes.
+  products: [{ type: Schema.Types.ObjectId, ref: "Product" }]
 });
 
 const User = mongoose.model("User", userSchema);
