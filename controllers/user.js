@@ -34,5 +34,19 @@ module.exports = {
       console.log(error);
       res.status(500).json({ message: "internal server error" });
     }
+  },
+
+  deleteProduct: async (req, res) => {
+    const { id } = req.params;
+    try {
+      const product = await product.findByIdAndDelete(id, {
+        $pull: { products: id }
+      });
+
+      res.json({ product });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: "Internal server error." });
+    }
   }
 };
