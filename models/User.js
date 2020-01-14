@@ -18,6 +18,14 @@ const userSchema = new Schema({
     type: String,
     require: [true, { message: "name is required" }]
   },
+  status: {
+    type: String,
+    enum: ["Pending", "Active"],
+    default: "Pending"
+  },
+  confirmationCode: {
+    type: String
+  },
   // products, en este caso, será un array de ObjectIds. Es por ello que se pone el objeto objectId entre corchetes.
   products: [{ type: Schema.Types.ObjectId, ref: "Product" }]
 });

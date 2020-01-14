@@ -116,7 +116,7 @@ app.use("/", indexRouter);
 app.use("/auth", require("./routes/auth"));
 app.use("/products", require("./routes/products"));
 app.use("/users", require("./routes/users"));
-
+app.use("/email", require("./routes/email"))
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   res.status(404).json({ message: "Not found" });

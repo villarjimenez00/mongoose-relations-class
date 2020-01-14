@@ -48,5 +48,23 @@ module.exports = {
       console.log(error);
       res.status(500).json({ message: "Internal server error." });
     }
+  },
+  confirm: async (req, res) => {
+    const { confirmationcode } = req.params;
+
+    try {
+      const user = await User.findOneAndUpdate(
+        { confirmationCode: confirmationcode },
+        { status: "Active" }
+      );
+
+      if (!user)
+        return res.send(`<h1>Opps! Hubo un error. Intentelo más tarde`);
+
+      return res.send(`<h1>Bienvenido, ${user.name}`);
+    } catch (error) {
+      console.log(error);
+      res.send(`<h1>Opps! Hubo un error. `);
+    }
   }
 };
