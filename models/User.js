@@ -18,6 +18,9 @@ const userSchema = new Schema({
     type: String,
     require: [true, { message: "name is required" }]
   },
+  img: {
+    type: String
+  },
   status: {
     type: String,
     enum: ["Pending", "Active"],

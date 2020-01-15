@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 var indexRouter = require("./routes/index");
 const User = require("./models/User");
 const passport = require("passport");
-
+const fileUpload = require("express-fileupload");
 // importamos la estrategia local
 const LocalStrategy = require("passport-local").Strategy;
 
@@ -112,11 +112,15 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(express.static(path.join(__dirname, "public")));
 
+// conbfiguración de middleware de archivos
+app.use(fileUpload());
+
 app.use("/", indexRouter);
 app.use("/auth", require("./routes/auth"));
 app.use("/products", require("./routes/products"));
 app.use("/users", require("./routes/users"));
-app.use("/email", require("./routes/email"))
+app.use("/email", require("./routes/email"));
+app.use("/image", require("./routes/upload"));
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   res.status(404).json({ message: "Not found" });
