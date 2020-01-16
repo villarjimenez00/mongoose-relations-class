@@ -7,5 +7,10 @@ router.get("/", isAuthenticated, (req, res, next) => {
   // en caso de entrar a la función, quiere decir que el usuario esta autorizado
   res.json({ message: "Autorizado" });
 });
+router.use("/auth", require("./auth"));
+router.use("/products", require("./products"));
+router.use("/users", require("./users"));
+router.use("/email", require("./email"));
+router.use("/image", require("./upload"));
 
 module.exports = router;
