@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const { isAutenticated } = require("../../middlewares/authentication");
+const { isAuthenticated } = require("../../middlewares/authentication");
 const isUserActive = require("../../middlewares/isUserActive");
 const product = require("../../controllers/product");
 
-router.get("/:id", [isAutenticated, isUserActive], product.getById);
+router.get("/:id", [isAuthenticated, isUserActive], product.getById);
 
 module.exports = router;

@@ -1,10 +1,10 @@
 var express = require("express");
 var router = express.Router();
-const { isAutenticated } = require("../../middlewares/authentication");
+const { isAuthenticated } = require("../../middlewares/authentication");
 const nodemailer = require("nodemailer");
 const emailTemplate = require("./template-email");
 
-router.post("/", isAutenticated, async (req, res) => {
+router.post("/", isAuthenticated, async (req, res) => {
   const { email, message, subject, name } = req.body;
 
   const transporter = nodemailer.createTransport({

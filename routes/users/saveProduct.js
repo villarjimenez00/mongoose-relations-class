@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const { isAutenticated } = require("../../middlewares/authentication");
+const { isAuthenticated } = require("../../middlewares/authentication");
 
 const user = require("../../controllers/user");
 
-router.put("/:id", isAutenticated, user.saveProduct);
+router.put("/:id", isAuthenticated, user.saveProduct);
 
 module.exports = router;

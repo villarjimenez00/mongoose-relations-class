@@ -2,7 +2,7 @@ const passport = require("passport");
 
 module.exports = {
   // 5. Definimos el middlewere que ire en la ruta a autenticar
-  isAutenticated: (req, res, next) => {
+  isAuthenticated: (req, res, next) => {
     // definimos el método de autenticación como jwt, la sesión a false y el callback para gestionar la información de la estrategia jwt
     passport.authenticate("jwt", { session: false }, (error, user, info) => {
       console.log(
