@@ -4,6 +4,7 @@ const path = require("path");
 const { isAuthenticated } = require("../../middlewares/authentication");
 const User = require("../../models/User");
 
+// 4.3. Envío de imagen de usuario
 router.get("/", isAuthenticated, async (req, res) => {
   const user = req.user;
 

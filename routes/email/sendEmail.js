@@ -7,6 +7,9 @@ const emailTemplate = require("./template-email");
 router.post("/", isAuthenticated, async (req, res) => {
   const { email, message, subject, name } = req.body;
 
+
+  // Creamos un transportador con la configuración del email. 
+  // En este caso, dado que lo haremos a través de un servicio ya predeterminado (Gmail) solo configuramos el nombre del servicio y nuestras credenciales
   const transporter = nodemailer.createTransport({
     service: "Gmail",
     auth: {
@@ -15,6 +18,8 @@ router.post("/", isAuthenticated, async (req, res) => {
     }
   });
 
+  // Creado el transportador, enviamos con el el email con los parámetros necesarios para el envío
+  // de forma asíncrona.
   try {
     const response = await transporter.sendMail({
       from: process.env.USER_NODEMAILER,

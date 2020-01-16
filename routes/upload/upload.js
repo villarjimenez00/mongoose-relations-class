@@ -5,6 +5,7 @@ const { isAuthenticated } = require("../../middlewares/authentication");
 const User = require("../../models/User");
 const fs = require("fs");
 
+// 4.2. Subida de archivos
 router.post("/", isAuthenticated, async (req, res) => {
 
   // Comprobamos si se han enviados archivos desde el cliente. 
@@ -76,6 +77,9 @@ router.post("/", isAuthenticated, async (req, res) => {
     console.log(error);
     res.status(500).json({ message: "Internal server error" });
   }
+
+// 4.3. Continúa en ./getImage para el envío de la imagen
+
 
   // guardado de imagen con Callback
   //   imageFile.mv(`${pathImage}/${fileNameWithId}`, (error, data) => {

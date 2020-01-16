@@ -20,7 +20,11 @@ const bcrypt = require("bcryptjs");
 
 var app = express();
 
-// 1. CONFIGURAMOS EN EXPRESS LA CONFIGURACIÓN DE PASSPORT
+//-----------------------------------------------------------//
+// 1. CONFIGURACIÓN DE LA ESTRATEGIA DE PASSPORT LOCAL Y JWT //
+//-----------------------------------------------------------//
+
+// 1.1 CONFIGURAMOS EN EXPRESS LA CONFIGURACIÓN DE PASSPORT
 /* Dado que para la autenticación por token no es necesario el uso de sesiones
   no será necesario la configuración de la sessión:
     app.use(passport.session());
@@ -30,7 +34,7 @@ var app = express();
 */
 app.use(passport.initialize());
 
-// 2. DEFINIMOS LA ESTRATEGIA LOCAL.
+// 1.2. DEFINIMOS LA ESTRATEGIA LOCAL.
 /* Esta estrategia servirá para establecer el login. 
   En ella comprobaremos que los datos de usuario son correctos (en este caso que exista y que la 
   contraseña sea validad) */
@@ -71,9 +75,9 @@ passport.use(
     }
   )
 );
-// 3. Tras esta función definiremos la ruta login (ir a ./routes/auth/login para continuar)
+// 1.3. Tras esta función definiremos la ruta login (ir a ./routes/auth/login para continuar)
 
-// 4. DEFINIMOS LA CONFIGURACIÓN DE LA ESTRATEGIA JWT
+// 1.4. DEFINIMOS LA CONFIGURACIÓN DE LA ESTRATEGIA JWT
 const opts = {
   // Especificamos de donde queremos extraer el token. En este caso de los headers como Bearer token
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -105,22 +109,27 @@ passport.use(
     }
   })
 );
-// 5. Tras esto, podemos proceder a autenticar las rutas (ir a ./routes/index)
+
+// 1.5. Tras esto, podemos proceder a autenticar las rutas (ir a ./routes/index)
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use(express.static(path.join(__dirname, "public")));
 
-// conbfiguración de middleware de archivos
+//----------------------------//
+//    4. SUBIDA DE ARCHIVOS   //
+//----------------------------//
+// 4.1. configuración de middleware de recogida de archivos
 app.use(fileUpload());
-
+// 4.2. (continúa en ./routes/upload/upload)
 app.use("/", indexRouter);
 app.use("/auth", require("./routes/auth"));
 app.use("/products", require("./routes/products"));
 app.use("/users", require("./routes/users"));
 app.use("/email", require("./routes/email"));
 app.use("/image", require("./routes/upload"));
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   res.status(404).json({ message: "Not found" });
