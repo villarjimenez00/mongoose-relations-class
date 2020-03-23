@@ -1,5 +1,5 @@
-var express = require("express");
-var router = express.Router();
+const express = require("express");
+const router = express.Router();
 const { isAuthenticated } = require("../../middlewares/authentication");
 const nodemailer = require("nodemailer");
 const emailTemplate = require("./template-email");
@@ -7,8 +7,7 @@ const emailTemplate = require("./template-email");
 router.post("/", isAuthenticated, async (req, res) => {
   const { email, message, subject, name } = req.body;
 
-
-  // Creamos un transportador con la configuración del email. 
+  // Creamos un transportador con la configuración del email.
   // En este caso, dado que lo haremos a través de un servicio ya predeterminado (Gmail) solo configuramos el nombre del servicio y nuestras credenciales
   const transporter = nodemailer.createTransport({
     service: "Gmail",
